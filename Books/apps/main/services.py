@@ -1,8 +1,8 @@
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext
 
 
 global_context = {
-    'title': _('BookStore'),
-    'login': _('Войти'),
-    'our_shops': _('Наши магазины'),
+    'title': gettext('BookStore'),
+    'login': gettext('Войти'),
+    'our_shops': gettext('Наши магазины'),
 }
