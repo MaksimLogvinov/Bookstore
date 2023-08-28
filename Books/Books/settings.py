@@ -1,4 +1,5 @@
 import os
+import logging
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -14,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -109,8 +110,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Logging
+
+text_log = logging.FileHandler('log.txt')
+console_out = logging.StreamHandler()
+logging.basicConfig(handlers=(console_out, text_log), level=logging.WARNING)
+
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = 'static/'
 
