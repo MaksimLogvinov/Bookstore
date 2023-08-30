@@ -30,9 +30,13 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    username = models.CharField(gettext('username'), max_length=150,
-                                validators=[AbstractUser.username_validator],
-                                null=True, blank=True,)
+    username = models.CharField(
+        gettext('username'),
+        max_length=150,
+        validators=[AbstractUser.username_validator],
+        null=True,
+        blank=True
+    )
     email = models.EmailField(gettext('email address'), unique=True)
     is_active = models.BooleanField(gettext('active'), default=False)
 
@@ -44,20 +48,44 @@ class CustomUser(AbstractUser):
 
 class Profile(models.Model):
     username_id = models.OneToOneField(
-        CustomUser, related_name="user_profile", on_delete=models.CASCADE,
+        CustomUser,
+        related_name="user_profile",
+        on_delete=models.CASCADE,
     )
-    bio = models.TextField("О себе", null=True, max_length=1000, blank=True)
-    birth_date = models.DateField("День рождение", null=True, blank=True)
+    birth_date = models.DateField(
+        "День рождение",
+        null=True,
+        blank=True)
     profile_img = models.ImageField(
-        "Фото профиля", null=True, blank=True, upload_to="users/profile/"
+        "Фото профиля",
+        null=True,
+        blank=True,
+        upload_to="users/profile/"
     )
-    country = models.TextField("Страна", max_length=100, null=True, blank=True)
-    city = models.TextField("Город", max_length=168, null=True, blank=True)
-    phoneNumber = PhoneNumberField("Номер телефона", unique=True, null=True,
-                                   blank=True)
+    country = models.TextField(
+        "Страна",
+        max_length=100,
+        null=True,
+        blank=True
+    )
+    city = models.TextField(
+        "Город",
+        max_length=168,
+        null=True,
+        blank=True
+    )
+    phoneNumber = PhoneNumberField(
+        "Номер телефона",
+        unique=True,
+        null=True,
+        blank=True)
     is_phone_verified = models.BooleanField(default=False)
     balance = models.DecimalField(
-        "Баланс", max_digits=8, decimal_places=2, blank=True, default=0
+        "Баланс",
+        max_digits=8,
+        decimal_places=2,
+        blank=True,
+        default=0
     )
 
     class Meta:

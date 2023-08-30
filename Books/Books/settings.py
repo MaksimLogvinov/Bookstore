@@ -27,9 +27,6 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.main',
-    'apps.users',
-    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'phonenumber_field',
+    'crispy_forms',
+    'apps.main',
+    'apps.users',
 ]
 
 SITE_ID = 1
@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'Books.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': f'{os.environ.get("NAME_DB")}',
-        'USER': f'{os.environ.get("USER_DB")}',
-        'PASSWORD': f'{os.environ.get("PASSWORD_DB")}',
-        'HOST': f'{os.environ.get("HOST")}',
-        'PORT': f'{os.environ.get("PORT")}',
+        'NAME': os.environ.get("NAME_DB"),
+        'USER': os.environ.get("USER_DB"),
+        'PASSWORD': os.environ.get("PASSWORD_DB"),
+        'HOST': os.environ.get("HOST"),
+        'PORT': os.environ.get("PORT"),
        }
 }
 
@@ -148,6 +148,6 @@ EMAIL_USE_TLS = True
 EMAIL_USER_SSL = True
 EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = f"{os.environ.get('EMAIL_HOST_USER')}"
-EMAIL_HOST_PASSWORD = f"{os.environ.get('EMAIL_HOST_PASSWORD')}"
-DEFAULT_FROM_EMAIL = f"{os.environ.get('DEFAULT_FROM_EMAIL')}"
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')

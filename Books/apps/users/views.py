@@ -1,6 +1,6 @@
 from gettext import gettext
 
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model, login, authenticate
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
@@ -11,23 +11,22 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 from django.views.generic import CreateView, TemplateView
 
-from apps.users.forms import UserRegisterForm
-
-
-# from apps.users.services import verification
+from apps.users.forms import UserRegisterForm, LoginUserForm
 
 
 class LoginUser(CreateView):
+    form_class = LoginUserForm
+
     def get_context_data(self, **kwargs):
-        context = {}
+        context = {'title': gettext('Вход в аккаунт')}
         return context
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.is_active = False
-        user.save()
-
-        # verification(user)
+        username = self.request.POST["username"]
+        password = self.request.POST["password"]
+        user = authenticate(self.request, username=username, password=password)
+        if user is not None:
+            login(self.request, user)
 
 
 User = get_user_model()
