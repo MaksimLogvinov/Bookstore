@@ -36,7 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'phonenumber_field',
     'crispy_forms',
+    'apps.categories',
     'apps.main',
+    'apps.orders',
+    'apps.products',
     'apps.users',
 ]
 
@@ -45,12 +48,14 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'Books.urls'
 

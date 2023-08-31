@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
 
-class MainConfig(AppConfig):
+class CategoriesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.main'
-    verbose_name = 'Общее'
+    name = 'apps.categories'
