@@ -36,12 +36,18 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'phonenumber_field',
     'crispy_forms',
+    'crispy_bootstrap5',
     'apps.categories',
     'apps.main',
     'apps.orders',
     'apps.products',
     'apps.users',
 ]
+
+# Forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 SITE_ID = 1
 
@@ -144,9 +150,6 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Forms
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Email
 EMAIL_USE_TLS = True

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 13:18+0300\n"
+"POT-Creation-Date: 2023-09-04 13:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,112 +16,110 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 #: apps/main/models.py:7
 msgid "Страна хранилища"
-msgstr "Country stock"
+msgstr ""
 
 #: apps/main/models.py:11
 msgid "Регион хранилища"
-msgstr "Region stock"
+msgstr ""
 
 #: apps/main/models.py:15
 msgid "Город хранилища"
-msgstr "City stock"
+msgstr ""
 
 #: apps/main/models.py:19
 msgid "Почтовый код"
-msgstr "Postal code"
+msgstr ""
 
 #: apps/main/models.py:25
 msgid "Хранилище товаров"
-msgstr "Stock products"
+msgstr ""
 
 #: apps/main/models.py:26
 msgid "Хранилища товаров"
-msgstr "Stocks products"
+msgstr ""
 
 #: apps/main/services.py:5
 msgid "BookStore"
-msgstr "BookStore"
+msgstr ""
 
 #: apps/main/services.py:6
 msgid "Войти"
-msgstr "Sign in"
+msgstr ""
 
 #: apps/main/services.py:7
 msgid "Наши магазины"
-msgstr "Our stores"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:20
 msgid "Ассортимент"
-msgstr "Catalog"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:23
 #: apps/main/templates/main/base_template.html:120
-#, fuzzy
-#| msgid "Наши магазины"
 msgid "Адреса магазинов"
-msgstr "Our stores"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:26
 msgid "Поддержка и контакты"
-msgstr "Support and contacts"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:83
 msgid "Книжный интернет-магазин «BookStore»"
-msgstr "Online bookstore «BookStore»"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:117
-#, fuzzy
-#| msgid "Наши магазины"
 msgid "В наших магазинах:"
-msgstr "Our stores"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:123
 msgid "Услуги"
-msgstr "Services"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:126
 msgid "Наши партнеры"
-msgstr "Our stores"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:129
 msgid "О компании"
-msgstr "About the company"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:132
 msgid "Хотите у нас работать?"
-msgstr "Do you want to work for us?"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:137
 msgid "В интернет-магазине:"
-msgstr "In the online store:"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:140
 msgid "Доставка и оплата"
-msgstr "Delivery and payment"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:143
 msgid "Бонусная программа"
-msgstr "Bonus program"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:146
 msgid "Вопросы и ответы"
-msgstr "Questions and answers"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:149
 msgid "Обратная связь"
-msgstr "Feedback"
+msgstr ""
 
 #: apps/main/templates/main/base_template.html:152
 msgid "Акции"
-msgstr "Stocks"
+msgstr ""
 
 #: apps/main/views.py:13
 msgid "Начальная страница"
-msgstr "Main page"
+msgstr ""
 
 #: apps/main/views.py:14
 msgid "Добро пожаловать"
-msgstr "Welcome"
+msgstr ""
