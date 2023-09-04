@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 {% csrf_token %}
 <html lang="en">
 <head>
@@ -16,13 +17,13 @@
         <nav class="header__nav-menu">
             <ul class="nav__list">
                 <li class="nav__list-item">
-                    <a href="">Ассортимент</a>
+                    <a href="">{% trans 'Ассортимент' %}</a>
                 </li>
                 <li class="nav__list-item">
-                    <a href="">Адреса магазинов</a>
+                    <a href="">{% trans 'Адреса магазинов' %}</a>
                 </li>
                 <li class="nav__list-item">
-                    <a href="">Поддержка и контакты</a>
+                    <a href="">{% trans 'Поддержка и контакты' %}</a>
                 </li>
             </ul>
         </nav>
@@ -79,7 +80,7 @@
     <footer role="contentinfo" class="footer">
         <div class="footer__list">
             <div class="footer__list-item">
-                <h4 class="footer__list-h4">Книжный интернет-магазин «BookStore»</h4>
+                <h4 class="footer__list-h4">{% trans 'Книжный интернет-магазин «BookStore»' %}</h4>
             </div>
             <div class="footer__list-item">
                 <h6 class="footer__list-h6">«BookStore» - сеть книжных магазинов, успешно работающих по всей
@@ -113,42 +114,42 @@
             </div>
         </div>
         <div class="footer__shops">
-            <h4 class="footer__list-h4">В наших магазинах:</h4>
+            <h4 class="footer__list-h4">{% trans 'В наших магазинах:' %}</h4>
             <ul class="shops__list">
                 <li class="shops__list-item">
-                    <a href="">Адреса магазинов</a>
+                    <a href="">{% trans 'Адреса магазинов' %}</a>
                 </li>
                 <li class="shops__list-item">
-                    <a href="">Услуги</a>
+                    <a href="">{% trans 'Услуги' %}</a>
                 </li>
                 <li class="shops__list-item">
-                    <a href="">Наши партнеры</a>
+                    <a href="">{% trans 'Наши партнеры' %}</a>
                 </li>
                 <li class="shops__list-item">
-                    <a href="">О компании</a>
+                    <a href="">{% trans 'О компании' %}</a>
                 </li>
                 <li class="shops__list-item">
-                    <a href="">Хотите у нас работать?</a>
+                    <a href="">{% trans 'Хотите у нас работать?' %}</a>
                 </li>
             </ul>
         </div>
         <div class="footer__web-shop">
-            <h4 class="footer__list-h4">В интернет-магазине:</h4>
+            <h4 class="footer__list-h4">{% trans 'В интернет-магазине:' %}</h4>
             <ul class="shops__list">
                 <li class="shops__list-item">
-                    <a href="">Доставка и оплата</a>
+                    <a href="">{% trans 'Доставка и оплата' %}</a>
                 </li>
                 <li class="shops__list-item">
-                    <a href="">Бонусная программа</a>
+                    <a href="">{% trans 'Бонусная программа' %}</a>
                 </li>
                 <li class="shops__list-item">
-                    <a href="">Вопросы и ответы</a>
+                    <a href="">{% trans 'Вопросы и ответы' %}</a>
                 </li>
                 <li class="shops__list-item">
-                    <a href="">Обратная связь</a>
+                    <a href="">{% trans 'Обратная связь' %}</a>
                 </li>
                 <li class="shops__list-item">
-                    <a href="">Акции</a>
+                    <a href="">{% trans 'Акции' %}</a>
                 </li>
             </ul>
         </div>

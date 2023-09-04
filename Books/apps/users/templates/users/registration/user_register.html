@@ -5,8 +5,8 @@
 {% block content %}
 <div>
 <form method="POST">
-        {{ form|crispy }}
         {% csrf_token %}
+        {{ form|crispy }}
         <button type="submit">Зарегистрироваться</button>
 </form>
 </div>

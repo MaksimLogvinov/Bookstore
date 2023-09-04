@@ -66,11 +66,11 @@ class RegisterUserView(CreateView):
         user.is_active = False
         user.save()
         send_message(
-            user=self.request.user,
+            user=user,
             url_name='confirm_email',
-            subject='Подтвердите свой электронный адрес',
-            message=f'Пожалуйста, перейдите по следующей ссылке,'
-                    f' чтобы подтвердить свой адрес электронный почты:')
+            subject=gettext('Подтвердите свой электронный адрес'),
+            message=gettext(f'Пожалуйста, перейдите по следующей ссылке, '
+                            f'чтобы подтвердить свой адрес электронный почты:'))
 
         return redirect('email_confirmation_sent')
 
@@ -132,9 +132,9 @@ class ResetPasswordView(TemplateView):
         send_message(
             user=self.request.user,
             url_name='password_email',
-            subject='Ваш пароль пытаются сменить',
-            message=f'Перейдите по следующей ссылке, '
-                    f'чтобы сменить пароль:')
+            subject=gettext('Ваш пароль пытаются сменить'),
+            message=gettext(f'Перейдите по следующей ссылке, '
+                            f'чтобы сменить пароль:'))
         return redirect('email_confirmation_sent')
 
 

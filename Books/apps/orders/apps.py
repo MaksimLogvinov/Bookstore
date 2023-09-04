@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.utils.translation import gettext
 
 
 class OrdersConfig(AppConfig):

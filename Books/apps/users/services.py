@@ -1,9 +1,12 @@
+import logging
+
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
+from django.utils.translation import gettext
 
 
 def send_message(user, url_name, subject, message):
@@ -18,4 +21,4 @@ def send_message(user, url_name, subject, message):
               message=message + f'http://{current_site}{activation_url}',
               recipient_list=[user.email], from_email='vvglvv1@yandex.ru',
               fail_silently=False)
-    print("Сообщение отправлено")
+    logging.log(51, gettext("Сообщение отправлено"))
