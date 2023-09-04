@@ -1,0 +1,14 @@
+{% extends 'admin/base_site.html' %}
+{% block title %} {{ title }} {% endblock title %}
+{% block content %}
+<div style="display: block;">
+    {% for i in data %}
+        <div>
+            Номер: {{ i.id }}
+            Почта: {{ i.email }}
+            Активирован: {{ i.is_active }}
+            Суперпользователь: {{ i.is_superuser }}
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -65,6 +65,7 @@ class ChangePasswordForm(SetPasswordForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+
     class Meta:
         model = CustomUser
         fields = ('email',)
