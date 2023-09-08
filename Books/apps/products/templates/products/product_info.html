@@ -1,0 +1,44 @@
+{% extends 'main/base_template.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <div>
+        <form action="{% url 'cart:cart_add' categories.id %}" method="post" class="product__form">
+            {% csrf_token %}
+            <div class="product__top">
+                {% for photo in photos %}
+                    <img src="{{ photo.photo_link.url }}" class="product__photo" alt="Фотография товара">
+                {% empty %}
+                    <img src="{% static 'cart/img/no_image.png' %}" class="product__photo" alt="Фотография товара">
+                {% endfor %}
+            </div>
+            <div class="product__body">
+                <div class="product__text">
+                    <h3>{{ categories.prod_title }}</h3>
+                    <p>{{ categories.prod_description }}</p>
+                    <p>Количество страниц: {{ categories.prod_number_pages }}</p>
+                    <p>Автор: {{ categories.prod_author }}</p>
+                    <p>Год публикации: {{ categories.prod_year_publication }}</p>
+                </div>
+            {% if categories.prod_quantity_on_stock > 0 %}
+                <div class="product__buy">
+                    <h4>{{ categories.prod_price }}₽</h4>
+                    <div style="display: none"><p>{{ cart_product_form }}</p></div>
+                    {% if user.is_authenticated %}
+                        <button type="submit">Купить</button>
+                    {% else %}
+                        <a class="a_button" href="{% url 'login' %}">Купить</a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p>Товар закончился</p>
+            {% endif %}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

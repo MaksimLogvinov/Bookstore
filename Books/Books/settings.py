@@ -24,6 +24,8 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
+CART_SESSION_ID = "cart"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +39,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django_filters',
+    'apps.cart',
     'apps.categories',
     'apps.main',
     'apps.orders',
@@ -76,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.cart.context_processors.cart',
             ],
         },
     },
@@ -139,7 +144,7 @@ logging.basicConfig(handlers=(console_out, text_log), level=logging.WARNING)
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = []
 

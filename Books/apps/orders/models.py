@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext
 
-from apps.users.models import CustomUser
 from apps.products.models import Categories
+from apps.users.models import CustomUser
 
 
 class Orders(models.Model):

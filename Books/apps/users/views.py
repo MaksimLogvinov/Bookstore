@@ -4,14 +4,17 @@ from django.contrib.auth import get_user_model, login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, ListView
+from django.views.generic.edit import ModelFormMixin, UpdateView
 
-from apps.users.forms import UserRegisterForm, LoginUserForm, ChangePasswordForm
-from apps.users.models import CustomUser
+from apps.users.forms import UserRegisterForm, LoginUserForm, \
+    ChangePasswordForm, SaveUserForm, SaveProfileForm
+from apps.users.models import CustomUser, Profile
 from apps.users.services import send_message
 
 
@@ -28,11 +31,33 @@ class LoginUserView(LoginView):
         return redirect('home_page')
 
 
-class ProfileUserView(TemplateView):
+class ProfileUserView(CreateView):
     template_name = "users/profile_user.html"
+    model = Profile
+    fields = SaveUserForm
 
     def get_context_data(self, **kwargs):
-        pass
+        context = {'title': 'Информация о пользователе'}
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form_data = SaveUserForm(request.POST)
+        form_data2 = SaveProfileForm(request.POST)
+        form_data.is_valid()
+        form_data2.is_valid()
+        CustomUser.objects.filter(id=1).update(**form_data.cleaned_data)
+        Profile.object.filter(id=1).update(**form_data2.cleaned_data)
+
+        return redirect('security_user')
+
+
+class SecurityUserView(ListView):
+    model = CustomUser
+    template_name = "users/security_user.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = gettext("Безопасность и вход")
 
     @staticmethod
     def post(request):
@@ -83,7 +108,8 @@ class UserConfirmEmailView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
 
-        if user is not None and default_token_generator.check_token(user, token):
+        if user is not None and default_token_generator.check_token(user,
+                                                                    token):
             user.is_active = True
             user.save()
             login(request, user)
@@ -146,7 +172,8 @@ class EmailResetPasswordView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
 
-        if user is not None and default_token_generator.check_token(user, token):
+        if user is not None and default_token_generator.check_token(user,
+                                                                    token):
             return redirect('password_confirmed')
         else:
             return redirect('password_confirmation_failed')
@@ -162,7 +189,8 @@ class ResetPasswordDone(PasswordChangeView):
         return context
 
     def form_valid(self, form):
-        if form.cleaned_data['new_password1'] == form.cleaned_data['new_password2']:
+        if form.cleaned_data['new_password1'] == form.cleaned_data[
+            'new_password2']:
             user = CustomUser.objects.get(email=self.request.user.email)
             user.set_password(str(form.cleaned_data['new_password1']))
             user.save()
@@ -174,5 +202,6 @@ class ResetPasswordFailed(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext('Ваш пароль не был сменён, повторите попытку')
+        context['title'] = gettext(
+            'Ваш пароль не был сменён, повторите попытку')
         return context

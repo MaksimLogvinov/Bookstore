@@ -1,0 +1,53 @@
+{% extends 'main/base_template.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+    <div class="cart-main__blocks">
+        <ul class="user-links cart-nav__menu">
+            <a href="{% url 'cart:cart_detail' %}"><li>Корзина</li></a>
+            <a href=""><li class="categoies_selected">История заказов</li></a>
+        </ul>
+    {% if orders|length > 0 %}
+        <div class="hist-table">
+        <table>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Дата оформления</th>
+                <th>Описание</th>
+                <th>Адрес доставки</th>
+                <th>Оплата</th>
+                <th>Товары</th>
+            </tr>
+            <tr class="hist-more-info">
+        {% for i in orders %}
+                <td><a href="." id="{{ i.id }}"><button>{{ i.id }}</button></a></td>
+                <td><a href="." id="{{ i.id }}">{{ i.created }}</a></td>
+                <td><a href="." id="{{ i.id }}">{{ i.description }}</a></td>
+                <td><a href="." id="{{ i.id }}">{{ i.deliv_address }}</a></td>
+                <td><a href="." id="{{ i.id }}">
+                    {% if i.paid %}Оплачен
+                    {% else %}Не оплачен
+                    {% endif %}
+                    </a>
+                </td>
+                <td style="display: block">
+                    {% for g in i.linkorder.all %}
+                        <p style="font-size: 14px; width: 150px"> {{ g.product.title }} {{ g.quantity }}шт
+                            <script>document.write("" + ({{ g.price }} * {{ g.quantity }}))</script>₽</p><br>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+    </div>
+    {% include 'catalog/paginator.html' with page=posts %}
+    {% else %}
+    <div class="cart_zero-items" style="width: 800px">
+        <p>История отсутствует</p>
+    </div>
+    {% endif %}
+{% endblock %}

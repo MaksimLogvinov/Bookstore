@@ -5,7 +5,7 @@ from apps.users.views import (
     UserConfirmEmailView, EmailConfirmedView,
     EmailConfirmationFailedView, LoginUserView,
     ResetPasswordView, ResetPasswordDone,
-    ProfileUserView, logout_user,
+    ProfileUserView, logout_user, SecurityUserView,
     EmailResetPasswordView, ResetPasswordFailed
 )
 
@@ -35,6 +35,9 @@ urlpatterns = [
     path("profile/",
          ProfileUserView.as_view(),
          name="profile_user"),
+    path("security/",
+         SecurityUserView.as_view(),
+         name="security_user"),
     path("logout/",
          logout_user,
          name='logout'),
