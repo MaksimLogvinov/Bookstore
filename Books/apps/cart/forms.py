@@ -1,5 +1,7 @@
 from django import forms
 
+from apps.orders.models import ReservationProduct
+
 
 class CartAddProductForm(forms.Form):
     quantity = forms.IntegerField(
@@ -13,3 +15,10 @@ class CartAddProductForm(forms.Form):
         initial=False,
         widget=forms.HiddenInput
     )
+
+
+class OrderReverseForm(forms.ModelForm):
+
+    class Meta:
+        model = ReservationProduct
+        fields = ('res_time_out',)

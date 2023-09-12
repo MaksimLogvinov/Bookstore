@@ -1,6 +1,8 @@
 from django.urls import path
 
-from apps.cart.views import cart_detail, cart_add, cart_remove, MoreInfo
+from apps.cart.views import (
+    cart_detail, cart_add, cart_remove, HistoryOrder,
+    OrderReserveView)
 
 urlpatterns = [
     path(
@@ -20,7 +22,12 @@ urlpatterns = [
     ),
     path(
         "history/",
-        MoreInfo.as_view(),
+        HistoryOrder.as_view(),
         name="history"
     ),
+    path(
+        'reserve/',
+        OrderReserveView.as_view(),
+        name='order_reserve'
+    )
 ]

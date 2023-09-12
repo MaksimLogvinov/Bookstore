@@ -34,35 +34,42 @@
             <button type="submit" style="margin-top: 10px; font-size: 14px; display: flex; justify-content: center">Применить</button>
             </form>
         </div>
-        <div class="body__products">
-        {% for product in filter %}
-            <a href="{% url 'product_info' product.slug %}" class="product_cart">
-            <form action="{% url 'cart:cart_add' product.id %}" method="post" class="products__form">
+        <div class="categoriers__body">
+            <form action="{% url 'search' %}" class="categoriers__search">
                 {% csrf_token %}
-                <div class="products__top">
-                    {% for photo in product.photos.select_related %}
-                        <img src="{{ photo.photo_link.url }}" class="product__photo" alt="Фотография товара">
-                    {% empty %}
-                        <img src="{% static 'cart/img/no_image.png' %}" class="product__photo" alt="Фотография товара">
-                    {% endfor %}
-                </div>
-                <h5>{{ product.prod_title }}</h5>
-                <div class="product__buy">
-                    {% if product.prod_quantity_on_stock > 0 %}
-                        <div style="display: none;"><p>{{ cart_product_form }}</p></div>
-                        <p>{{ product.prod_price }}₽</p>
-                        {% if user.is_authenticated %}
-                            <button type="submit">Купить</button>
-                        {% else %}
-                            <a class="a_button" href="{% url 'login' %}">Купить</a>
-                        {% endif %}
-                    {% else %}
-                        <a>Товар закончился</a>
-                    {% endif %}
-                </div>
+                <input type="text" class="search__input" name="search_prod" placeholder="Поиск по сайту">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
-            </a>
-        {% endfor %}
+            <div class="body__products">
+            {% for product in filter %}
+                <div onclick="location.href='{% url 'product_info' product.slug %}'" class="product_cart">
+                    <form action="{% url 'cart:cart_add' product.id %}" method="post" class="products__form">
+                        {% csrf_token %}
+                        <div class="products__top">
+                            {% for photo in product.photos.select_related %}
+                                <img src="{{ photo.photo_link.url }}" class="product__photo" alt="Фотография товара">
+                            {% empty %}
+                                <img src="{% static 'cart/img/no_image.png' %}" class="product__photo" alt="Фотография товара">
+                            {% endfor %}
+                        </div>
+                        <h5>{{ product.prod_title }}</h5>
+                        <div class="product__buy">
+                            {% if product.prod_quantity_on_stock > 0 %}
+                                <div style="display: none;"><p>{{ cart_product_form }}</p></div>
+                                <p>{{ product.prod_price }}₽</p>
+                                {% if user.is_authenticated %}
+                                    <button type="submit">Купить</button>
+                                {% else %}
+                                    <a class="a_button" href="{% url 'login' %}">Купить</a>
+                                {% endif %}
+                            {% else %}
+                                <a>Товар закончился</a>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            {% endfor %}
+            </div>
         </div>
     </div>
     <div style="display: flex; align-items: center">

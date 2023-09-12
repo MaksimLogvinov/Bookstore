@@ -7,8 +7,9 @@
 {% block content %}
     <div class="cart__main">
         <div class="main__nav">
-            <a href="" class="a_button">Корзина</a>
+            <a href=""  class="categoies_selected a_button">Корзина</a>
             <a href="{% url 'cart:history' %}" class="a_button">История заказов</a>
+            <a href="{% url 'cart:order_reserve' %}" class="a_button">Бронирование</a>
         </div>
         {% if cart|length > 0 %}
         <div class="cart">
@@ -53,11 +54,16 @@
                     <p>{{ cart.get_total_price }} ₽</p>
                 </div>
                 <a href="{% url 'order_create' %}" class="a_button cart_buy-left">Оформить заказ</a>
+                <form method="POST" action="{% url 'cart:order_reserve' %}" class="a_button cart_buy-left">
+                    {% csrf_token %}
+                    <input name="res_time_out" type="datetime-local">
+                    <button type="submit">Забронировать</button>
+                </form>
             </div>
         </div>
     </div>
     {% else %}
-        <div class="cart_zero-items" style="min-width: 800px; margin: 0 auto">
+        <div class="cart_zero-items" style="padding: 50px 100px; width: 800px;">
             <p>Корзина пуста</p>
         </div>
     {% endif %}

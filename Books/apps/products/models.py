@@ -37,6 +37,9 @@ class Categories(models.Model):
         verbose_name=gettext("Автор"),
         max_length=200
     )
+    prod_age_restriction = models.IntegerField(
+        verbose_name=gettext("Возрастное ограничение"),
+    )
     prod_year_publication = models.DateField(
         verbose_name=gettext("Год публикации"),
     )

@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from apps.products.models import Categories, Books, Magazines, Photos_product, \
     TextBooks
 
@@ -16,7 +15,8 @@ class PhotosAdmin(admin.ModelAdmin):
 
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):
-    list_display = ["id", "prod_title", "prod_description", "slug",
+    list_display = ["id", "prod_title", "prod_age_restriction",
+                    "prod_description", "slug",
                     "prod_price", "prod_number_pages",
                     "prod_author", "prod_year_publication",
                     "prod_quantity_on_stock", "get_tag", "prod_is_active"]

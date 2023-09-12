@@ -51,7 +51,7 @@ class OrderAdmin(admin.ModelAdmin):
         if cookie_filter != "none" and cookie_filter:
             text = f"Новых заказов появилось за {cookie_filter}:"
         else:
-            text = f"Всего заказов:"
+            text = "Всего заказов:"
         data = []
         for attribute in qs:
             if attribute.paid:

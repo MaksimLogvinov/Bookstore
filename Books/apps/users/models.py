@@ -105,7 +105,7 @@ class Profile(models.Model):
         default=0
     )
 
-    object = models.Manager()
+    objects = models.Manager()
 
     class Meta:
         verbose_name = gettext("Профиль")

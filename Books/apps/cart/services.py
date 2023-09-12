@@ -32,7 +32,9 @@ def update_quantity(cart):
 
 def history_orders(context, user_id, page_number):
     context.update({"title": "История заказов"})
-    orders = Orders.objects.filter(ord_user_id=user_id).order_by("-ord_date_created")[:20]
+    orders = Orders.objects.filter(
+        ord_user_id=user_id).order_by("-ord_date_created"
+                                      )
     paginator = Paginator(orders, 10)
     context["posts"] = paginator.page(page_number)
     context["orders"] = paginator.get_page(page_number)

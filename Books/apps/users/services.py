@@ -26,3 +26,14 @@ def send_message(user, url_name, subject, message):
               from_email=os.environ.get('EMAIL_HOST_USER'),
               fail_silently=False)
     logging.log(51, gettext("Сообщение отправлено"))
+
+
+def send_email(recipient, link, subject, message):
+    current_site = Site.objects.get_current().domain
+    if current_site == 'example.com':
+        current_site = os.environ.get('LOCALE_URL')
+    send_mail(subject=subject,
+              message=message + f"http://{current_site}/" + link,
+              recipient_list=[recipient],
+              from_email=os.environ.get('EMAIL_HOST_USER'),
+              fail_silently=False)

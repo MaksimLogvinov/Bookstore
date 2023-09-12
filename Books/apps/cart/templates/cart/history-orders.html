@@ -5,49 +5,57 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block content %}
-    <div class="cart-main__blocks">
-        <ul class="user-links cart-nav__menu">
-            <a href="{% url 'cart:cart_detail' %}"><li>Корзина</li></a>
-            <a href=""><li class="categoies_selected">История заказов</li></a>
-        </ul>
-    {% if orders|length > 0 %}
-        <div class="hist-table">
-        <table>
-            <tr>
-                <th>Номер заказа</th>
-                <th>Дата оформления</th>
-                <th>Описание</th>
-                <th>Адрес доставки</th>
-                <th>Оплата</th>
-                <th>Товары</th>
-            </tr>
-            <tr class="hist-more-info">
-        {% for i in orders %}
-                <td><a href="." id="{{ i.id }}"><button>{{ i.id }}</button></a></td>
-                <td><a href="." id="{{ i.id }}">{{ i.created }}</a></td>
-                <td><a href="." id="{{ i.id }}">{{ i.description }}</a></td>
-                <td><a href="." id="{{ i.id }}">{{ i.deliv_address }}</a></td>
-                <td><a href="." id="{{ i.id }}">
-                    {% if i.paid %}Оплачен
-                    {% else %}Не оплачен
-                    {% endif %}
-                    </a>
-                </td>
-                <td style="display: block">
-                    {% for g in i.linkorder.all %}
-                        <p style="font-size: 14px; width: 150px"> {{ g.product.title }} {{ g.quantity }}шт
-                            <script>document.write("" + ({{ g.price }} * {{ g.quantity }}))</script>₽</p><br>
-                    {% endfor %}
-                </td>
-            </tr>
-        {% endfor %}
-        </table>
+<div>
+    <div class="history-order__body">
+        <div class="main__nav">
+                <a href="{% url 'cart:cart_detail' %}"  class="categoies_selected a_button">Корзина</a>
+                <a href="" class="a_button">История заказов</a>
+                <a href="{% url 'cart:order_reserve' %}" class="a_button">Бронирование</a>
+        </div>
+        <div>
+        {% if orders|length > 0 %}
+            <div class="hist-table">
+            <table>
+                <tr>
+                    <th>Номер заказа</th>
+                    <th>Дата оформления</th>
+                    <th>Описание</th>
+                    <th>Адрес доставки</th>
+                    <th>Оплата</th>
+                    <th>Товары</th>
+                </tr>
+                <tr class="hist-more-info">
+            {% for order in orders %}
+                    <td><a href="." id="{{ order.id }}"><button>{{ order.id }}</button></a></td>
+                    <td><a href="." id="{{ order.id }}">{{ order.ord_date_created }}</a></td>
+                    <td><a href="." id="{{ order.id }}">{{ order.ord_description }}</a></td>
+                    <td><a href="." id="{{ order.id }}">{{ order.ord_address_delivery }}</a></td>
+                    <td><a href="." id="{{ order.id }}">
+                        {% if order.ord_paid %}Оплачен
+                        {% else %}Не оплачен
+                        {% endif %}
+                        </a>
+                    </td>
+                    <td style="display: block">
+                        {% for orderitem in order.linkorder.all %}
+                            <p style="font-size: 14px; width: 150px"> {{ orderitem.ordit_product.prod_title }} {{ orderitem.ordit_quantity }}шт
+                                <script>rez={{ orderitem.ordit_price }} * {{ orderitem.ordit_quantity }}; document.write(rez)</script>₽</p><br>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+            </div>
         </div>
     </div>
-    {% include 'catalog/paginator.html' with page=posts %}
+    <div style="display: flex; align-items: center; justify-content: center; padding-top: 20px">
+        {% include 'categories/paginator.html' with page=posts %}
+    </div>
+</div>
     {% else %}
     <div class="cart_zero-items" style="width: 800px">
         <p>История отсутствует</p>
     </div>
     {% endif %}
+
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from apps.main.views import HomePage, OurShops
+from apps.main.views import HomePage, OurShops, ContactSupportView
 
 urlpatterns = [
     path(
@@ -28,6 +28,11 @@ urlpatterns = [
         'shops/',
         OurShops.as_view(),
         name='shops'
+    ),
+    path(
+        'contact-support/',
+        ContactSupportView.as_view(),
+        name='contact_support'
     ),
     path(
         "product/",
