@@ -1,13 +1,13 @@
 from django.urls import path
 
 from apps.cart.views import (
-    cart_detail, cart_add, cart_remove, HistoryOrder,
+    CartDetail, cart_add, cart_remove, HistoryOrder,
     OrderReserveView)
 
 urlpatterns = [
     path(
         "",
-        cart_detail,
+        CartDetail.as_view(),
         name="cart_detail"
     ),
     path(

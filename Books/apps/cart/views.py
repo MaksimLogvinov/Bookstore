@@ -1,19 +1,19 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, FormView
 
 from apps.cart.cart import Cart
-from apps.cart.forms import CartAddProductForm, OrderReverseForm
+from apps.cart.forms import CartAddProductForm, OrderReverseForm, DiscountForm
 from apps.cart.services import (
     history_orders,
     update_quantity,
     delete_product_from_cart,
     add_product_in_cart,
 )
+from apps.orders.forms import OrderCreateForm
 from apps.orders.models import Orders, ReservationProduct
 from apps.orders.services import create_order
-from apps.orders.forms import OrderCreateForm
 
 
 @require_POST
@@ -31,13 +31,18 @@ def cart_remove(request, product_id):
     return redirect("cart:cart_detail")
 
 
-def cart_detail(request):
-    cart = update_quantity(Cart(request))
-    return render(
-        request,
-        "cart/detail.html",
-        {"cart": cart, "title": "Корзина"}
-    )
+class CartDetail(FormView):
+    form_class = DiscountForm
+    template_name = 'cart/detail.html'
+
+    def get_context_data(self, **kwargs):
+        cart = update_quantity(Cart(self.request))
+        discount = DiscountForm
+        context = {
+            'cart': cart,
+            'discount': discount,
+            'title': "Корзина"}
+        return context
 
 
 class HistoryOrder(ListView):
@@ -88,5 +93,4 @@ class OrderReserveView(CreateView):
             res_user_id=self.request.user,
             res_time_out=form.cleaned_data['res_time_out']
         )
-
         return redirect('cart:order_reserve')

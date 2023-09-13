@@ -17,9 +17,8 @@ class HomePage(ListView):
         context.update({"title": gettext("Начальная страница"),
                         'header_text': gettext("Добро пожаловать")})
 
-        ReservationProduct.objects.filter(
-            res_user_id=self.request.user
-        ).filter(res_time_out__lte=datetime.now()-timedelta(days=1)).delete()
+        (ReservationProduct.objects
+         .filter(res_time_out__lte=datetime.now()-timedelta(days=1)).delete())
         return context
 
 

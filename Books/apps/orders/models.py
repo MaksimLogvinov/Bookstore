@@ -1,7 +1,3 @@
-import os
-
-from django.contrib.sites.models import Site
-from django.core.mail import send_mail
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -37,6 +33,17 @@ class Orders(models.Model):
         verbose_name=gettext("Оплачено"),
         default=False,
         blank=True
+    )
+    ord_price = models.DecimalField(
+        verbose_name=gettext('Стоимость'),
+        max_digits=10,
+        decimal_places=2,
+    )
+    ord_discount = models.DecimalField(
+        verbose_name=gettext('Скидка'),
+        max_digits=10,
+        decimal_places=2,
+        null=True
     )
 
     def __str__(self):
@@ -86,6 +93,7 @@ class OrderItem(models.Model):
 
 @receiver(post_save, sender=Orders)
 def purchase_message(sender, instance, **kwargs):
+    instance.ord_user_id.user_profile.balance -= instance.ord_discount
     send_email(
         instance.ord_user_id.email,
         'cart/history/',

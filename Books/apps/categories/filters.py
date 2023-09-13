@@ -1,9 +1,9 @@
-import django_filters
+from django_filters import FilterSet
 
 from apps.products.models import Categories, Books, Magazines, TextBooks
 
 
-class CategoriesFilter(django_filters.FilterSet):
+class CategoriesFilter(FilterSet):
     class Meta:
         model = Categories
         fields = {
@@ -14,7 +14,7 @@ class CategoriesFilter(django_filters.FilterSet):
         }
 
 
-class BooksFilter(django_filters.FilterSet):
+class BooksFilter(FilterSet):
     class Meta:
         model = Books
         fields = {
@@ -26,7 +26,7 @@ class BooksFilter(django_filters.FilterSet):
         }
 
 
-class MagazinesFilter(django_filters.FilterSet):
+class MagazinesFilter(FilterSet):
     class Meta:
         model = Magazines
         fields = {
@@ -38,7 +38,7 @@ class MagazinesFilter(django_filters.FilterSet):
         }
 
 
-class TextbooksFilter(django_filters.FilterSet):
+class TextbooksFilter(FilterSet):
     class Meta:
         model = TextBooks
         fields = {

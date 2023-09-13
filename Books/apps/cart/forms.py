@@ -17,6 +17,10 @@ class CartAddProductForm(forms.Form):
     )
 
 
+class DiscountForm(forms.Form):
+    discount_check = forms.BooleanField(initial=False, required=False)
+
+
 class OrderReverseForm(forms.ModelForm):
 
     class Meta:

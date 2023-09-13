@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from apps.cart.forms import CartAddProductForm
 from apps.orders.models import Orders
 from apps.products.models import Categories
+from django.template.defaultfilters import register, floatformat
 
 
 def add_product_in_cart(cart, form, product_id):
@@ -28,6 +29,31 @@ def update_quantity(cart):
             initial={"quantity": item["quantity"], "update": True}
         )
     return cart
+
+
+@register.filter
+def res_price(value, sub):
+    if value - sub > 1:
+        result = value - sub
+    else:
+        result = 1
+    return result
+
+
+@register.filter
+def discount(sub, value):
+    if value - sub > 1:
+        result = sub
+    else:
+        max_disc = sub - value
+        result = sub - max_disc - 1
+    return result
+
+
+@register.filter
+def float_num(value):
+    value = floatformat(value, arg=2)
+    return str(value).replace(',', '.')
 
 
 def history_orders(context, user_id, page_number):

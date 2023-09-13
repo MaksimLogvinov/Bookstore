@@ -499,13 +499,23 @@ main{
 }
 
 .cart_item{
-    width: 600px;
     display: flex;
     flex-direction:row-reverse;
     justify-content: space-between;
     background-color: #B0C7DD;
     border-radius: 10px;
     padding: 20px;
+}
+
+.cart_buy-left{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.cart_buy-left input{
+    border-radius: 10px;
+    border: 1px #B0C7DD solid;
+    padding: 0 8px;
 }
 
 .categoriers__search{
