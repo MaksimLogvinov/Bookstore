@@ -8,10 +8,11 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, ListView
 
-from apps.users.forms import UserRegisterForm, LoginUserForm, ChangePasswordForm
-from apps.users.models import CustomUser
+from apps.users.forms import UserRegisterForm, LoginUserForm, \
+    ChangePasswordForm, SaveUserForm, SaveProfileForm
+from apps.users.models import CustomUser, Profile
 from apps.users.services import send_message
 
 
@@ -28,11 +29,37 @@ class LoginUserView(LoginView):
         return redirect('home_page')
 
 
-class ProfileUserView(TemplateView):
+class ProfileUserView(CreateView):
     template_name = "users/profile_user.html"
+    model = Profile
+    fields = SaveUserForm
 
     def get_context_data(self, **kwargs):
-        pass
+        context = {'title': 'Информация о пользователе'}
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form_data = SaveUserForm(request.POST)
+        form_data2 = SaveProfileForm(request.POST)
+        form_data.is_valid()
+        form_data2.is_valid()
+        CustomUser.objects.filter(
+            id=request.user.id
+        ).update(**form_data.cleaned_data)
+        Profile.objects.filter(
+            username_id_id=request.user.id
+        ).update(**form_data2.cleaned_data)
+
+        return redirect('security_user')
+
+
+class SecurityUserView(ListView):
+    model = CustomUser
+    template_name = "users/security_user.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = gettext("Безопасность и вход")
 
     @staticmethod
     def post(request):
@@ -62,16 +89,16 @@ class RegisterUserView(CreateView):
         return context
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.is_active = False
-        user.save()
+        user = CustomUser.objects.create_user(
+            email=form.cleaned_data['email'],
+            password=form.cleaned_data['password1']
+        )
         send_message(
             user=user,
             url_name='confirm_email',
             subject=gettext('Подтвердите свой электронный адрес'),
-            message=gettext(f'Пожалуйста, перейдите по следующей ссылке, '
-                            f'чтобы подтвердить свой адрес электронный почты:'))
-
+            message=gettext('Пожалуйста, перейдите по следующей ссылке, '
+                            'чтобы подтвердить свой адрес электронный почты:'))
         return redirect('email_confirmation_sent')
 
 
@@ -83,11 +110,12 @@ class UserConfirmEmailView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
 
-        if user is not None and default_token_generator.check_token(user, token):
+        if user is not None and default_token_generator.check_token(user,
+                                                                    token):
             user.is_active = True
             user.save()
             login(request, user)
-            return redirect('email_confirmed')
+            return redirect('profile_user')
         else:
             return redirect('email_confirmation_failed')
 
@@ -98,15 +126,6 @@ class EmailConfirmationSentView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = gettext('Письмо активации отправлено')
-        return context
-
-
-class EmailConfirmedView(TemplateView):
-    template_name = 'users/registration/email_confirmed.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = gettext('Ваш электронный адрес активирован')
         return context
 
 
@@ -133,8 +152,8 @@ class ResetPasswordView(TemplateView):
             user=self.request.user,
             url_name='password_email',
             subject=gettext('Ваш пароль пытаются сменить'),
-            message=gettext(f'Перейдите по следующей ссылке, '
-                            f'чтобы сменить пароль:'))
+            message=gettext('Перейдите по следующей ссылке, '
+                            'чтобы сменить пароль:'))
         return redirect('email_confirmation_sent')
 
 
@@ -146,7 +165,8 @@ class EmailResetPasswordView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
 
-        if user is not None and default_token_generator.check_token(user, token):
+        if user is not None and default_token_generator.check_token(user,
+                                                                    token):
             return redirect('password_confirmed')
         else:
             return redirect('password_confirmation_failed')
@@ -162,7 +182,8 @@ class ResetPasswordDone(PasswordChangeView):
         return context
 
     def form_valid(self, form):
-        if form.cleaned_data['new_password1'] == form.cleaned_data['new_password2']:
+        if (form.cleaned_data['new_password1']
+                == form.cleaned_data['new_password2']):
             user = CustomUser.objects.get(email=self.request.user.email)
             user.set_password(str(form.cleaned_data['new_password1']))
             user.save()
@@ -174,5 +195,6 @@ class ResetPasswordFailed(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext('Ваш пароль не был сменён, повторите попытку')
+        context['title'] = gettext(
+            'Ваш пароль не был сменён, повторите попытку')
         return context

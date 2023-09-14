@@ -1,9 +1,9 @@
+from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, \
     AuthenticationForm, SetPasswordForm
-from django import forms
 from django.utils.translation import gettext
 
-from .models import CustomUser
+from apps.users.models import CustomUser, Profile
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -69,3 +69,16 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('email',)
+
+
+class SaveUserForm(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ['first_name', 'last_name']
+
+
+class SaveProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['phoneNumber', 'birth_date', 'country', 'city', 'id']

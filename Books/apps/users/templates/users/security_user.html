@@ -1,0 +1,30 @@
+{% extends 'main/base_template.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+    <div class="security__main">
+        <div>
+            <div class="security__nav">
+                <a href="{% url 'profile_user' %}" class="a_button security__nav-item">Основная информация</a>
+                <a href="" class="a_button security__nav-item active">Безопасность и вход</a>
+            </div>
+        </div>
+        <div class="security__body">
+           <form method="POST" action="{% url 'reset_password' %}">
+                {% csrf_token %}
+                <button type="submit" name="delete_user">{% trans 'Изменить пароль' %}</button>
+            </form>
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" name="logout_user">{% trans 'Выйти' %}</button>
+            </form>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <button type="submit" name="delete_user">{% trans 'Удалить аккаунт' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

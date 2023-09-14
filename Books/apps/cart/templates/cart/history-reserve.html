@@ -1,0 +1,41 @@
+{% extends 'main/base_template.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+<div>
+    <div style="display: flex; gap: 10px; align-items: flex-start">
+        <div class="main__nav">
+            <a href="{% url 'cart:cart_detail' %}"  class="categoies_selected a_button">Корзина</a>
+            <a href="{% url 'cart:history' %}" class="a_button">История заказов</a>
+            <a href="" class="a_button">Бронирование</a>
+        </div>
+        <div>
+            <div class="hist-table">
+            <table>
+                <tr>
+                    <th>Номер бронирования</th>
+                    <th>Номер заказа</th>
+                    <th>Дата оформления</th>
+                    <th>До какого действует</th>
+                </tr>
+                <tr class="hist-more-info">
+                {% for reserve_order in reserve %}
+                    <td><a href="." id="{{ reserve_order.id }}"><button>{{ reserve_order.id }}</button></a></td>
+                    <td><a href="." id="{{ reserve_order.id }}">{{ reserve_order.res_order_id }}</a></td>
+                    <td><a href="." id="{{ reserve_order.id }}">{{ reserve_order.res_time_created }}</a></td>
+                    <td><a href="." id="{{ reserve_order.id }}">{{ reserve_order.res_time_out }}</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: center; padding-top: 20px">
+        {% include 'categories/paginator.html' with page=posts %}
+    </div>
+</div>
+{% endblock content %}

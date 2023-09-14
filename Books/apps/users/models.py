@@ -39,8 +39,14 @@ class CustomUser(AbstractUser):
         null=True,
         blank=True
     )
-    email = models.EmailField(verbose_name=gettext('Почта'), unique=True)
-    is_active = models.BooleanField(gettext('active'), default=False)
+    email = models.EmailField(
+        verbose_name=gettext('Почта'),
+        unique=True
+    )
+    is_active = models.BooleanField(
+        verbose_name=gettext('Подтвержденный'),
+        default=False
+    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -62,7 +68,8 @@ class Profile(models.Model):
     birth_date = models.DateField(
         verbose_name=gettext("День рождение"),
         null=True,
-        blank=True)
+        blank=True
+    )
     profile_img = models.ImageField(
         verbose_name=gettext("Фото профиля"),
         null=True,
@@ -97,6 +104,8 @@ class Profile(models.Model):
         blank=True,
         default=0
     )
+
+    objects = models.Manager()
 
     class Meta:
         verbose_name = gettext("Профиль")

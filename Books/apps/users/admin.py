@@ -61,7 +61,7 @@ class CustomUserAdmin(PermissionRequiredMixin, UserAdmin):
 
         def get_context_data(self, *, object_list=None, **kwargs):
             context = super().get_context_data()
-            context.update({"title": "Список пользователей",
+            context.update({"title": gettext("Список пользователей"),
                             "data": CustomUser.objects.all().values()})
             return context
 
@@ -69,8 +69,8 @@ class CustomUserAdmin(PermissionRequiredMixin, UserAdmin):
         if not request.user.is_authenticated():
             raise Http404
         context = dict(self.admin_site.each_context(request))
-        context.update({"title": "Реализация действия"})
-        return TemplateResponse(request, "testing.html", context)
+        context.update({"title": gettext("Реализация действия")})
+        return TemplateResponse(request, "users/admin/testing.html", context)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

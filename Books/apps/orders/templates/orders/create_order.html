@@ -1,0 +1,70 @@
+{% extends 'main/base_template.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+<div class="order-style">
+    <h2>Ваш заказ</h2>
+    <div class="order-main">
+    <div class="order-left__head">
+        <h6>Заполните данные для оформления заказа:</h6>
+        <form action="{% url 'paid_order' %}" method="post">
+        {% csrf_token %}
+        <div class="order-form__body">
+            <div class="order-form__block">
+                <label> {{ form.ord_description.label }}:
+                    <input name="ord_description">
+                </label>
+                <label> {{ form.ord_address_delivery.label }}:
+                    <input name="ord_address_delivery">
+                </label>
+
+                <label> {{ form.ord_paid.label }}:
+                    <input type="checkbox" name="ord_paid">
+                </label>
+            </div>
+        </div>
+            <div class="order-submit__feet">
+                <label>Применить скидку<input id="button"  type="checkbox"></label>
+                <label id="disc_not"> {{ form.ord_price.label }}
+                    <input name="ord_price" value="{{ cart.get_total_price|float_num }}">
+                    <input name="ord_discount" value="0">
+                </label>
+                <label id="disc" style="display: none;"> Итого со скидкой:
+                    <input name="ord_price" value="{{ cart.get_total_price|res_price:user.user_profile.balance|float_num }}">
+                    <input name="ord_discount" value="{{ user.user_profile.balance|discount:cart.get_total_price|float_num }}">
+                </label>
+                <p class="order-form__submit"><input type="submit" value="Продолжить" class="a_button" style="padding: 5px"></p>
+            </div>
+        </form>
+    </div>
+    <div class="order-right__head">
+        <h6>В вашем заказе следующие товары:</h6>
+        <ul class="order-select-prod__head">
+            {% for item in cart %}
+                <li>
+                    {{ item.quantity }} x {{ item.product.title }}
+                    <span>${{ item.total_price }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+</div>
+<script type="text/javascript">
+    document.getElementById('button').onclick = function () {
+        if (this.checked) {
+            document.getElementById('disc').style.cssText = 'display: block'
+            document.getElementById('disc_not').style.cssText = 'display: none'
+        }
+        else {
+            document.getElementById('disc').style.cssText = 'display: none'
+            document.getElementById('disc_not').style.cssText = 'display: block'
+        }
+    }
+</script>
+{% endblock %}

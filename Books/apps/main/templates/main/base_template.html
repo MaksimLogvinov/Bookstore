@@ -17,10 +17,10 @@
         <nav class="header__nav-menu">
             <ul class="nav__list">
                 <li class="nav__list-item">
-                    <a href="">{% trans 'Ассортимент' %}</a>
+                    <a href="{% url 'magazine_catalog' %}">{% trans 'Ассортимент' %}</a>
                 </li>
                 <li class="nav__list-item">
-                    <a href="">{% trans 'Адреса магазинов' %}</a>
+                    <a href="{% url 'shops' %}">{% trans 'Адреса магазинов' %}</a>
                 </li>
                 <li class="nav__list-item">
                     <a href="">{% trans 'Поддержка и контакты' %}</a>
@@ -32,16 +32,15 @@
                 {% with total_items=cart|length %}
                         {% if cart|length > 0 %}
                            <li class="header__list-item">
-                               <a href="" style="position:relative">
+                               <a href="{% url 'cart:cart_detail' %}" style="position:relative">
                                    <i class="fa-solid fa-basket-shopping"></i>
                                    <p class="num_goods">{{ total_items }}</p>
                                </a>
                            </li>
                         {% else %}
                             <li class="header__list-item">
-                                <a href="" style="position:relative">
+                                <a href="{% url 'cart:cart_detail' %}" style="position:relative">
                                     <i class="fa-solid fa-basket-shopping"></i>
-                                    <p class="num_goods">{{ total_items }}</p>
                                 </a>
                             </li>
                         {% endif %}
@@ -56,12 +55,12 @@
                     </li>
                 {% endif %}
             {% else %}
-                <li>
+                <li class="header__list-item">
                     <a href="{% url 'login' %}" style="font-size: 24px">
                         <i class="fa-solid fa-basket-shopping" style="position:relative"></i>
                     </a>
                 </li>
-                <li>
+                <li class="header__list-item">
                     <a href="{% url 'login' %}" style="font-size: 24px">
                         <i class="fa-solid fa-user"></i>
                     </a>

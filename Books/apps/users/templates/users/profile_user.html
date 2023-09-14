@@ -1,23 +1,90 @@
 {% extends 'main/base_template.html' %}
 {% load crispy_forms_tags %}
 {% load i18n %}
+{% load static %}
 {% block title %}{{ title }}{% endblock title %}
 
 {% block content %}
+   <div class="security__main">
+        <div>
+            <div class="security__nav">
+                <a href="" class="a_button security__nav-item">Основная информация</a>
+                <a href="{% url 'security_user' %}" class="a_button security__nav-item active">Безопасность и вход</a>
+            </div>
+        </div>
+        <form class="security__body" method="POST">
+        {% csrf_token %}
+            <div class="security__logo-name">
+                <div class="security__logo">
+                    {% if user.profile_img.url %}
+                        <img src="{{ user.profile_img.url }}" alt="Фото профиля">
+                    {% else %}
+                        <i class="fa-solid fa-user"></i>
+                    {% endif %}
+                </div>
+                <div class="security__name">
+                    {% if user.first_name and user.last_name %}
+                        <h5>{{ user.first_name }} {{ user.last_name }}</h5>
+                    {% else %}
+                        <h5>{{ user.email }}</h5>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="security__form-name">
+                <label>
+                    <input value="{{ user.first_name }}" placeholder="Имя" pattern="[A-Za-zА-Яа-яЁё]{2,40}" name="first_name">
+                </label>
+                <label>
+                    <input value="{{ user.last_name }}" placeholder="Фамилия" pattern="[A-Za-zА-Яа-яЁё]{2,100}" name="last_name">
+                </label>
+            </div>
+            <div class="security__balance">
+                <p>Баланс:</p>
+                {% if user.user_profile.balance %}
+                    <p>{{ user.user_profile.balance }}₽</p>
+                {% else %}
+                    <p>0₽</p>
+                {% endif %}
+            </div>
+            <div class="security__phone">
+                <label>Номер телефона:
+                    <input type="tel" value="{% if user.user_profile.phoneNumber %} {{ user.user_profile.phoneNumber }} {% endif %}" placeholder="Телефон" name="phoneNumber">
+                </label>
+                {% if user.user_profile.is_phone_verified %}
+                    <p>Подтвержден</p>
+                {% else %}
+                    <p>Не подтвержден</p>
+                {% endif %}
+            </div>
+            <div class="security__birthday">
+                <label>День рождения:
+                    <input value="{% if user.user_profile.birth_date  %}{{ user.user_profile.birth_date|date:'d.m.Y' }} {% endif %}" required="required" placeholder="дд.мм.гггг" id="id_birth_date" name="birth_date">
+                </label>
+            </div>
+            <div class="product__geo-position">
+                <p>Место проживания</p>
+                <label>Страна:
+                    <input value="{% if user.user_profile.country %}{{ user.user_profile.country }} {% endif %}" placeholder="не задана" name="country">
+                </label>
+                <label>Город:
+                    <input value="{% if user.user_profile.city %}{{ user.user_profile.city }} {% endif %}" placeholder="не задан" name="city">
+                </label>
+            </div>
+            <div class="security__log">
+                <div class="security__last-login">
+                    <p>Последний вход:</p>
+                    <p>{{ user.last_login }}</p>
+                </div>
+                <div class="security__date-reg">
+                    <p>Дата регистрации:</p>
+                    <p>{{ user.date_joined }}</p>
+                </div>
+            </div>
+            <button type="submit">Обновить информацию</button>
+        </form>
+   </div>
    <div>
-       <div class="logout__body">
-            <form method="POST" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit" name="logout_user">{% trans 'Выйти' %}</button>
-            </form>
-            <form method="POST">
-                {% csrf_token %}
-                <button type="submit" name="delete_user">{% trans 'Удалить аккаунт' %}</button>
-            </form>
-           <form method="POST" action="{% url 'reset_password' %}">
-                {% csrf_token %}
-                <button type="submit" name="delete_user">{% trans 'Изменить пароль' %}</button>
-            </form>
+        <div class="logout__body">
         </div>
     </div>
 {% endblock content %}
