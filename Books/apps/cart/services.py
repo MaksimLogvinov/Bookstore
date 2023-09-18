@@ -3,12 +3,12 @@ from django.shortcuts import get_object_or_404
 
 from apps.cart.forms import CartAddProductForm
 from apps.orders.models import Orders
-from apps.products.models import Categories
+from apps.products.models import Products
 from django.template.defaultfilters import register, floatformat
 
 
 def add_product_in_cart(cart, form, product_id):
-    product = get_object_or_404(Categories, id=product_id)
+    product = get_object_or_404(Products, id=product_id)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(
@@ -19,7 +19,7 @@ def add_product_in_cart(cart, form, product_id):
 
 
 def delete_product_from_cart(cart, product_id):
-    product = get_object_or_404(Categories, id=product_id)
+    product = get_object_or_404(Products, id=product_id)
     cart.remove(product)
 
 

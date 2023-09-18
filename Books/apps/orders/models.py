@@ -3,7 +3,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext
 
-from apps.products.models import Categories
+from apps.products.models import Products
 from apps.users.models import CustomUser
 from apps.users.services import send_email
 
@@ -46,6 +46,8 @@ class Orders(models.Model):
         null=True
     )
 
+    objects = models.Manager()
+
     def __str__(self):
         return f"{self.pk}"
 
@@ -66,7 +68,7 @@ class OrderItem(models.Model):
         on_delete=models.CASCADE
     )
     ordit_product = models.ForeignKey(
-        Categories,
+        Products,
         verbose_name=gettext("Товар в заказе"),
         related_name='ordprod',
         on_delete=models.CASCADE

@@ -4,12 +4,12 @@ from apps.products.models import GenresBooks, GenresMagazines, ClassesTextbooks
 
 
 @admin.register(GenresBooks)
-class GenresAdmin(admin.ModelAdmin):
+class GenresBooksAdmin(admin.ModelAdmin):
     list_display = ["id", "genre_name", "genre_description"]
 
 
 @admin.register(GenresMagazines)
-class GenresAdmin(admin.ModelAdmin):
+class GenresMagazinesAdmin(admin.ModelAdmin):
     list_display = ["id", "genre_name", "genre_description"]
 
 

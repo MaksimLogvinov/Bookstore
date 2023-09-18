@@ -6,7 +6,7 @@ from django.template.defaultfilters import register
 
 from apps.cart.forms import CartAddProductForm
 from apps.categories.filters import CategoriesFilter
-from apps.products.models import Categories
+from apps.products.models import Products
 
 
 def base_data():
@@ -20,11 +20,13 @@ def categories(page_number, get, user=None, data=None):
     context = base_data()
     context["cat_selected"] = 0
     today = date.today()
-    prod = Categories.objects.order_by("prod_year_publication")
+    prod = Products.objects.order_by("prod_year_publication")
     if not user.is_anonymous and user.user_profile.birth_date:
         birth_date = user.user_profile.birth_date
-        user_age = (today.year - birth_date.year
-                    - ((today.month, today.day) < (birth_date.month, birth_date.day)))
+        user_age = (
+                today.year - birth_date.year -
+                ((today.month, today.day) < (birth_date.month, birth_date.day))
+        )
         prod = prod.filter(prod_age_restriction__lte=user_age)
     if data:
         prod = prod.filter(
@@ -50,5 +52,5 @@ def show_categories(page_number, filter_res):
 
 
 @register.filter
-def rating(h, key):
-    return h[key]
+def rating(dict_data, key):
+    return dict_data[key]

@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
-from apps.products.models import Categories
+from apps.products.models import Products
 
 
 class Cart(object):
@@ -14,7 +14,7 @@ class Cart(object):
     def __iter__(self):
         product_ids = self.cart.keys()
 
-        products = Categories.objects.filter(id__in=product_ids)
+        products = Products.objects.filter(id__in=product_ids)
 
         cart = self.cart.copy()
         for product in products:

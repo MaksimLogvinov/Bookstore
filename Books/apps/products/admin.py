@@ -1,10 +1,10 @@
 from django.contrib import admin
-from apps.products.models import Categories, Books, Magazines, Photos_product, \
+from apps.products.models import Products, Books, Magazines, Photos_product, \
     TextBooks
 
 
 class ProdStorageInline(admin.TabularInline):
-    model = Categories.prod_storage_id.through
+    model = Products.prod_storage_id.through
     extra = 3
 
 
@@ -13,7 +13,7 @@ class PhotosAdmin(admin.ModelAdmin):
     list_display = ['id', 'photo_link', 'prod_photo_id']
 
 
-@admin.register(Categories)
+@admin.register(Products)
 class CategoriesAdmin(admin.ModelAdmin):
     list_display = ["id", "prod_title", "prod_age_restriction",
                     "prod_description", "slug",
@@ -29,14 +29,14 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 @admin.register(Books)
 class BooksAdmin(admin.ModelAdmin):
-    list_display = ["categories_ptr_id", "book_genre"]
+    list_display = ["products_ptr_id", "book_genre"]
 
 
 @admin.register(TextBooks)
-class BooksAdmin(admin.ModelAdmin):
-    list_display = ["categories_ptr_id", "textbook_class"]
+class TextBooksAdmin(admin.ModelAdmin):
+    list_display = ["products_ptr_id", "textbook_class"]
 
 
 @admin.register(Magazines)
 class MagazinesAdmin(admin.ModelAdmin):
-    list_display = ["categories_ptr_id", "magazine_genre"]
+    list_display = ["products_ptr_id", "magazine_genre"]

@@ -182,10 +182,10 @@ class ResetPasswordDone(PasswordChangeView):
         return context
 
     def form_valid(self, form):
-        if (form.cleaned_data['new_password1']
-                == form.cleaned_data['new_password2']):
+        if (form.cleaned_data['new_password1'] == form.cleaned_data['new_password2']):
             user = CustomUser.objects.get(email=self.request.user.email)
             user.set_password(str(form.cleaned_data['new_password1']))
+            print(form.cleaned_data['new_password1'])
             user.save()
         return redirect('home_page')
 

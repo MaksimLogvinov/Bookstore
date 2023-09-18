@@ -1,13 +1,13 @@
 from django.views.generic import DetailView
 
-from apps.products.models import Categories
+from apps.products.models import Products
 from apps.cart.forms import CartAddProductForm
 
 
 class ProductInfoView(DetailView):
     template_name = "products/product_info.html"
     slug_url_kwarg = "prod_slug"
-    model = Categories
+    model = Products
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

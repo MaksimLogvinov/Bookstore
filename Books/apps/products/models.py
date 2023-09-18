@@ -10,7 +10,7 @@ class ActiveProduct(models.Manager):
         return super().get_queryset().filter(prod_is_active=True)
 
 
-class Categories(models.Model):
+class Products(models.Model):
     prod_title = models.CharField(
         verbose_name=gettext("Название товара"),
         max_length=200,
@@ -81,7 +81,7 @@ class Photos_product(models.Model):
         verbose_name="Ссылка на фото"
     )
     prod_photo_id = models.ForeignKey(
-        Categories,
+        Products,
         verbose_name=gettext("Номер товара"),
         on_delete=models.CASCADE,
         related_name="photos"
@@ -131,7 +131,7 @@ class GenresMagazines(models.Model):
         verbose_name_plural = gettext("Жанры журналов")
 
 
-class Books(Categories):
+class Books(Products):
     book_genre = models.ForeignKey(
         GenresBooks,
         verbose_name=gettext("Жанр книги"),
@@ -160,7 +160,7 @@ class ClassesTextbooks(models.Model):
         verbose_name_plural = gettext("Классы учебников")
 
 
-class TextBooks(Categories):
+class TextBooks(Products):
     textbook_class = models.ForeignKey(
         ClassesTextbooks,
         verbose_name=gettext("Для каких классов"),
@@ -175,7 +175,7 @@ class TextBooks(Categories):
         verbose_name_plural = gettext("Учебники")
 
 
-class Magazines(Categories):
+class Magazines(Products):
     magazine_genre = models.ForeignKey(
         GenresMagazines,
         verbose_name=gettext("Жанр журнала"),
