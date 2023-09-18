@@ -8,11 +8,11 @@ from apps.categories.services import (
     categories
 )
 from apps.products.models import Books, TextBooks, Magazines
-from apps.products.models import Categories
+from apps.products.models import Products
 
 
 class SearchResultView(ListView):
-    model = Categories
+    model = Products
     template_name = "categories/categories.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):

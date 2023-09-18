@@ -1,11 +1,11 @@
 from django_filters import FilterSet
 
-from apps.products.models import Categories, Books, Magazines, TextBooks
+from apps.products.models import Products, Books, Magazines, TextBooks
 
 
 class CategoriesFilter(FilterSet):
     class Meta:
-        model = Categories
+        model = Products
         fields = {
             'prod_price': ['lt', 'gt'],
             'prod_is_active': ['exact'],

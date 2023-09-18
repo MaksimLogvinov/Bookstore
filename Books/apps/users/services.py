@@ -15,25 +15,25 @@ def send_message(user, url_name, subject, message):
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     activation_url = reverse_lazy(
         url_name,
-        kwargs={'uidb64': uid, 'token': token}
+        kwargs={"uidb64": uid, "token": token}
     )
     current_site = Site.objects.get_current().domain
-    if current_site == 'example.com':
-        current_site = os.environ.get('LOCALE_URL')
+    if current_site == "example.com":
+        current_site = os.environ.get("LOCALE_URL")
     send_mail(subject=subject,
-              message=message + f'http://{current_site}{activation_url}',
+              message=message + f"http://{current_site}{activation_url}",
               recipient_list=[user.email],
-              from_email=os.environ.get('EMAIL_HOST_USER'),
+              from_email=os.environ.get("EMAIL_HOST_USER"),
               fail_silently=False)
     logging.log(51, gettext("Сообщение отправлено"))
 
 
 def send_email(recipient, link, subject, message):
     current_site = Site.objects.get_current().domain
-    if current_site == 'example.com':
-        current_site = os.environ.get('LOCALE_URL')
+    if current_site == "example.com":
+        current_site = os.environ.get("LOCALE_URL")
     send_mail(subject=subject,
               message=message + f"http://{current_site}/" + link,
               recipient_list=[recipient],
-              from_email=os.environ.get('EMAIL_HOST_USER'),
+              from_email=os.environ.get("EMAIL_HOST_USER"),
               fail_silently=False)

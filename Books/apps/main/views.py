@@ -5,12 +5,12 @@ from django.views.generic import ListView
 
 from apps.main.models import Storages
 from apps.orders.models import ReservationProduct
-from apps.products.models import Categories
+from apps.products.models import Products
 
 
 class HomePage(ListView):
     template_name = "main/home_page.html"
-    model = Categories
+    model = Products
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -23,7 +23,7 @@ class HomePage(ListView):
 
 
 class OurShops(ListView):
-    model = Categories
+    model = Products
     template_name = "main/our_shops.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
