@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-04 13:26+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+#: apps/products/models.py:9 apps/products/models.py:37
+msgid "Фото товара"
+msgstr ""
+
+#: apps/products/models.py:19
+msgid "Название товара"
+msgstr ""
+
+#: apps/products/models.py:23
+msgid "Описание товара"
+msgstr ""
+
+#: apps/products/models.py:27
+msgid "Слаг товара"
+msgstr ""
+
+#: apps/products/models.py:31
+msgid "Цена товара"
+msgstr ""
+
+#: apps/products/models.py:41
+msgid "Кол-во страниц"
+msgstr ""
+
+#: apps/products/models.py:44
+msgid "Автор"
+msgstr ""
+
+#: apps/products/models.py:48
+msgid "Год публикации"
+msgstr ""
+
+#: apps/products/models.py:51
+msgid "Количество на складе"
+msgstr ""
+
+#: apps/products/models.py:55
+msgid "Хранилище товара"
+msgstr ""
+
+#: apps/products/models.py:59
+msgid "Есть в продаже"
+msgstr ""
+
+#: apps/products/models.py:65
+msgid "Категория товаров"
+msgstr ""
+
+#: apps/products/models.py:66
+msgid "Категории товаров"
+msgstr ""
+
+#: apps/products/models.py:71
+msgid "Название жанра"
+msgstr ""
+
+#: apps/products/models.py:75
+msgid "Описание жанра"
+msgstr ""
+
+#: apps/products/models.py:83
+msgid "Жанр книги"
+msgstr ""
+
+#: apps/products/models.py:88
+msgid "Книга"
+msgstr ""
+
+#: apps/products/models.py:89
+msgid "Книги"
+msgstr ""
+
+#: apps/products/models.py:94
+msgid "Для каких классов"
+msgstr ""
+
+#: apps/products/models.py:102 apps/products/models.py:108
+msgid "Учебники"
+msgstr ""
+
+#: apps/products/models.py:107
+msgid "Учебник"
+msgstr ""
+
+#: apps/products/models.py:114
+msgid "Жанр журнала"
+msgstr ""
+
+#: apps/products/models.py:119
+msgid "Журнал"
+msgstr ""
+
+#: apps/products/models.py:120
+msgid "Журналы"
+msgstr ""

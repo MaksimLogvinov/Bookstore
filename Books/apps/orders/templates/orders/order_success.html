@@ -1,0 +1,19 @@
+{% extends 'main/base_template.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <div>
+        <h5>Заказ успешно оформлен. В ближайшее время доставим его вам</h5>
+        <h6>Вы будете перенаправлены на главную страницу через 5 секунд</h6>
+    </div>
+
+<script>
+    setTimeout(function (){
+        window.location.href = '{% url 'home_page' %}';}, 4000);
+</script>
+{% endblock content %}

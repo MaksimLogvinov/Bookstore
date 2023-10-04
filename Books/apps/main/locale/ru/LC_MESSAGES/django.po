@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-04 13:26+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+#: apps/main/models.py:7
+msgid "Страна хранилища"
+msgstr ""
+
+#: apps/main/models.py:11
+msgid "Регион хранилища"
+msgstr ""
+
+#: apps/main/models.py:15
+msgid "Город хранилища"
+msgstr ""
+
+#: apps/main/models.py:19
+msgid "Почтовый код"
+msgstr ""
+
+#: apps/main/models.py:25
+msgid "Хранилище товаров"
+msgstr ""
+
+#: apps/main/models.py:26
+msgid "Хранилища товаров"
+msgstr ""
+
+#: apps/main/services.py:5
+msgid "BookStore"
+msgstr ""
+
+#: apps/main/services.py:6
+msgid "Войти"
+msgstr ""
+
+#: apps/main/services.py:7
+msgid "Наши магазины"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:20
+msgid "Ассортимент"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:23
+#: apps/main/templates/main/base_template.html:120
+msgid "Адреса магазинов"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:26
+msgid "Поддержка и контакты"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:83
+msgid "Книжный интернет-магазин «BookStore»"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:117
+msgid "В наших магазинах:"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:123
+msgid "Услуги"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:126
+msgid "Наши партнеры"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:129
+msgid "О компании"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:132
+msgid "Хотите у нас работать?"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:137
+msgid "В интернет-магазине:"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:140
+msgid "Доставка и оплата"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:143
+msgid "Бонусная программа"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:146
+msgid "Вопросы и ответы"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:149
+msgid "Обратная связь"
+msgstr ""
+
+#: apps/main/templates/main/base_template.html:152
+msgid "Акции"
+msgstr ""
+
+#: apps/main/views.py:13
+msgid "Начальная страница"
+msgstr ""
+
+#: apps/main/views.py:14
+msgid "Добро пожаловать"
+msgstr ""
